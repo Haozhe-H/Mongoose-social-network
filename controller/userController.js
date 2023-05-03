@@ -1,4 +1,4 @@
-const { User, Thought } = require("../models");
+const { User, Thought } = require("../model");
 
 //get all users
 function getUser(req, res) {
@@ -15,7 +15,7 @@ function getSingleUser(req, res) {
     .select("-__v")
     .then((user) =>
       !user
-        ? res.status(404).json({ message: "No User find with that ID!" })
+        ? res.status(404).json({ message: "No User find with this ID." })
         : res.json(user)
     )
     .catch((err) => res.status(500).json(err));
@@ -40,7 +40,7 @@ function updateUser(req, res) {
   )
     .then((user) =>
       !user
-        ? res.status(404).json({ message: "No User find with this ID!" })
+        ? res.status(404).json({ message: "No User find with this ID." })
         : res.json(user)
     )
     .catch((err) => res.status(500).json(err));
@@ -51,10 +51,12 @@ function deleteUser(req, res) {
   User.findOneAndDelete({ _id: req.params.userId })
     .then((user) =>
       !user
-        ? res.status(404).json({ message: "No User find with this ID!" })
+        ? res.status(404).json({ message: "No User find with this ID." })
         : Thought.deleteMany({ _id: { $in: user.thoughts } })
     )
-    .then(() => res.json({ message: "User and Thought deleted!" }))
+    .then(() =>
+      res.json({ message: "User and user's thought has been deleted." })
+    )
     .catch((err) => res.status(500).json(err));
 }
 
@@ -67,7 +69,7 @@ function addFriend(req, res) {
   )
     .then((user) =>
       !user
-        ? res.status(404).json({ message: "No User find with this ID!" })
+        ? res.status(404).json({ message: "No User find with this ID." })
         : res.json(user)
     )
     .catch((err) => res.status(500).json(err));
@@ -82,7 +84,7 @@ function deleteFriend(req, res) {
   )
     .then((user) =>
       !user
-        ? res.status(404).json({ message: "No User find with this ID!" })
+        ? res.status(404).json({ message: "No User find with this ID." })
         : res.json(user)
     )
     .catch((err) => res.status(500).json(err));
