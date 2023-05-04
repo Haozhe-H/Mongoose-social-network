@@ -57,7 +57,8 @@ function deleteThought(req, res) {
     .then((thought) =>
       !thought
         ? res.status(404).json({ message: "No thought find with this ID." })
-        : User.findOneAndUpdate(
+        : //update user after deleting a thought with user id
+          User.findOneAndUpdate(
             { thoughts: req.params.thoughtId },
             { $pull: { thoughts: req.params.thoughtId } },
             { new: true }
