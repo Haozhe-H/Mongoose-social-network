@@ -53,7 +53,7 @@ function updateThought(req, res) {
 
 // delete
 function deleteThought(req, res) {
-  Thought.findOneAndDelete({ _id: req.params.thoughtId })
+  Thought.findOneAndUpdate({ _id: req.params.thoughtId })
     .then((thought) =>
       !thought
         ? res.status(404).json({ message: "No thought find with this ID." })
@@ -90,7 +90,7 @@ function createReaction(req, res) {
 
 // delete reaction
 function deleteReaction(req, res) {
-  Thought.findOneAndDelete(
+  Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
     { $pull: { reactions: { reactionId: req.params.reactionId } } },
     { runValidators: true, new: true }
