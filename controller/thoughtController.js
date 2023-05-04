@@ -53,7 +53,7 @@ function updateThought(req, res) {
 
 // delete
 function deleteThought(req, res) {
-  Thought.findOneAndUpdate({ _id: req.params.thoughtId })
+  Thought.findOneAndDelete({ _id: req.params.thoughtId })
     .then((thought) =>
       !thought
         ? res.status(404).json({ message: "No thought find with this ID." })
