@@ -103,4 +103,12 @@ function deleteReaction(req, res) {
     .catch((err) => res.status(500).json(err));
 }
 
-
+module.exports = {
+  getThought,
+  getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought,
+  createReaction,
+  deleteReaction,
+};
